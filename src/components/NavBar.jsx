@@ -25,7 +25,7 @@ function NavBar() {
                   ></path>
                   <text
                     style={{ marginLeft: "10px" }}
-                    xml:space="preserve"
+                    xmlSpace="preserve"
                     textAnchor="start"
                     fontSize="23"
                     y="28"
@@ -43,41 +43,25 @@ function NavBar() {
                 </svg>
               </Link>
               <div className="hidden md:flex md:gap-x-6">
-                <NavLink
-                  activeClassName="bg-slate-100"
-                  className="main-nav-item"
-                  to="/user"
-                >
+                <NavLink className="main-nav-item" to="/user">
                   User
                 </NavLink>
 
-                <NavLink
-                  activeClassName="bg-slate-100"
-                  className="main-nav-item"
-                  to="/createProduct"
-                >
+                <NavLink className="main-nav-item" to="/createProduct">
                   Create Product
                 </NavLink>
               </div>
             </div>
 
             <div className="flex items-center gap-x-5 md:gap-x-8">
-              <NavLink
-                activeClassName="bg-slate-100"
-                className="main-nav-item px-5"
-                to="/cart"
-              >
+              <NavLink className="main-nav-item px-5" to="/cart">
                 <div className="cart_container">
                   <ShoppingCartIcon></ShoppingCartIcon>
                   <div className="cart_quantity">{quantity}</div>
                 </div>
               </NavLink>
               <div className="hidden md:block">
-                <NavLink
-                  activeClassName="bg-slate-100"
-                  className="main-nav-item"
-                  to="/login"
-                >
+                <NavLink className="main-nav-item" to="/login">
                   Sign in
                 </NavLink>
               </div>

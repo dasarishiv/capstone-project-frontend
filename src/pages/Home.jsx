@@ -135,12 +135,10 @@ function Home() {
           </div>
         </div>
 
-        <div className="categories_wrapper">
-          <Categories
-            categories={categories}
-            setCurrCategory={setCurrCategory}
-          ></Categories>
-        </div>
+        <Categories
+          categories={categories}
+          setCurrCategory={setCurrCategory}
+        ></Categories>
       </section>
 
       {/* main area  */}
