@@ -9,6 +9,7 @@ import ProductList from "../components/ProductList";
 import Categories from "../components/Categories";
 import basicOps from "../utility/basicOps";
 import { usePaginationContext } from "../contexts/PaginationContext";
+import { IconButton } from "../components/IconButton";
 
 function Home() {
   // preserver -> pagination
@@ -71,34 +72,66 @@ function Home() {
   return (
     <>
       {/* header */}
-      <header className="nav_wrapper">
-        <div className="search_sortWrapper">
-          <input
-            className="search_input"
-            type="text"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setPageNum(1);
-            }}
-          />
-          <div className="icons_container">
-            <ArrowCircleUpIcon
-              style={{ color: "white" }}
-              fontSize="large"
+      <section className="p-6 min-h-16 bg-slate-50">
+        <div className="max-w-prose flex justify-items-center items-center mx-auto mb-3">
+          <div className="group relative flex-1 pr-1">
+            <svg
+              width="20"
+              height="20"
+              fill="currentColor"
+              className="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-blue-500"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              />
+            </svg>
+            <input
+              className="min-h-14 focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm"
+              type="text"
+              aria-label="Filter products..."
+              placeholder="Filter products..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setPageNum(1);
+              }}
+            ></input>
+          </div>
+
+          <div className="icons_container flex gap-1 justify-center items-center flex-col">
+            <IconButton
               onClick={() => {
                 setsortDir(1);
                 setPageNum(1);
               }}
-            ></ArrowCircleUpIcon>
-            <ArrowCircleDownIcon
-              fontSize="large"
-              style={{ color: "white" }}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 18.75 7.5-7.5 7.5 7.5"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 12.75 7.5-7.5 7.5 7.5"
+              />
+            </IconButton>
+
+            <IconButton
               onClick={() => {
                 setsortDir(-1);
                 setPageNum(1);
               }}
-            ></ArrowCircleDownIcon>
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
+              />
+            </IconButton>
           </div>
         </div>
 
@@ -108,35 +141,56 @@ function Home() {
             setCurrCategory={setCurrCategory}
           ></Categories>
         </div>
-      </header>
+      </section>
 
       {/* main area  */}
       <main className="product_wrapper">
-        {/* products will be there */}
-        <ProductList productList={filteredSortedgroupByArr}> ̰</ProductList>
+        {filteredSortedgroupByArr?.length === 0 ? (
+          <div className="flex justify-center items-center">
+            <h6 className="text-2xl">No Products Found</h6>
+          </div>
+        ) : (
+          <>
+            {/* products will be there */}
+            <ProductList productList={filteredSortedgroupByArr}></ProductList>
+            {/* pagination */}
+            <div className="pagination">
+              {pageNum != 1 && (
+                <IconButton
+                  onClick={() => {
+                    if (pageNum == 1) return;
+                    setPageNum((pageNum) => pageNum - 1);
+                  }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 19.5 8.25 12l7.5-7.5"
+                  />
+                </IconButton>
+              )}
+
+              <div className="pagenum text-slate-900 bg-slate-100">
+                {pageNum}
+              </div>
+              {pageNum != totalPages && (
+                <IconButton
+                  onClick={() => {
+                    if (pageNum == totalPages) return;
+                    setPageNum((pageNum) => pageNum + 1);
+                  }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                  />
+                </IconButton>
+              )}
+            </div>
+          </>
+        )}
       </main>
-      {/* pagination */}
-      <div className="pagination">
-        <button
-          onClick={() => {
-            if (pageNum == 1) return;
-            setPageNum((pageNum) => pageNum - 1);
-          }}
-          disabled={pageNum == 1 ? true : false}
-        >
-          <KeyboardArrowLeftIcon fontSize="large"></KeyboardArrowLeftIcon>
-        </button>
-        <div className="pagenum">{pageNum}</div>
-        <button
-          onClick={() => {
-            if (pageNum == totalPages) return;
-            setPageNum((pageNum) => pageNum + 1);
-          }}
-          disabled={pageNum == totalPages ? true : false}
-        >
-          <ChevronRightIcon fontSize="large"></ChevronRightIcon>
-        </button>
-      </div>
     </>
   );
 }

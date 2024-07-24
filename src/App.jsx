@@ -43,12 +43,6 @@ function App() {
         </Routes>
       </PaginationProvider>
       <Chat></Chat>
-      <video id="videoPlayer" controls>
-        <source
-          src="http://localhost:3100/api/videos/sample"
-          type="video/mp4"
-        />
-      </video>
     </AuthProvider>
   );
 }

@@ -26,4 +26,5 @@
     4px 4px 12px -2.5px rgba(85, 166, 246, 0.15);
   position: sticky;
   top: 0;
+  z-index: 1000000;
 }
