@@ -142,7 +142,7 @@ function Home() {
       </section>
 
       {/* main area  */}
-      <main className="product_wrapper">
+      <main className="p-6">
         {filteredSortedgroupByArr?.length === 0 ? (
           <div className="flex justify-center items-center">
             <h6 className="text-2xl">No Products Found</h6>
@@ -152,7 +152,7 @@ function Home() {
             {/* products will be there */}
             <ProductList productList={filteredSortedgroupByArr}></ProductList>
             {/* pagination */}
-            <div className="pagination">
+            <div className="pagination mt-6">
               {pageNum != 1 && (
                 <IconButton
                   onClick={() => {
