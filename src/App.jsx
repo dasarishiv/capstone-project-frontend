@@ -21,9 +21,6 @@ function App() {
   return (
     <AuthProvider>
       <PaginationProvider>
-        <h1 className="text-center text-3xl font-bold underline bg-sky-500 text-white hover:bg-sky-700 cursor-pointer">
-          Project Title
-        </h1>
         <NavBar></NavBar>
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
