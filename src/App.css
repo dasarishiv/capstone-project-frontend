@@ -118,8 +118,9 @@ body {
   bottom: 0;
   right: 0;
   width: 20vw;
-  height: 40vh;
-  background-color: greenyellow;
+  height: auto;
+  max-height: 40vh;
+  /* background-color: greenyellow; */
 }
 .chat-container {
   height: 100%;
