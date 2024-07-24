@@ -14,3 +14,16 @@
 .st0 {
   fill: #2563eb;
 }
+.main-header {
+  background-color: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: rgba(191, 204, 217, 0.5);
+  box-shadow: 0 0 1px rgba(85, 166, 246, 0.1),
+    1px 1.5px 2px -1px rgba(85, 166, 246, 0.15),
+    4px 4px 12px -2.5px rgba(85, 166, 246, 0.15);
+  position: sticky;
+  top: 0;
+}

@@ -7,7 +7,7 @@ function NavBar() {
   });
   return (
     <>
-      <header className="py-10">
+      <header className="main-header py-4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav className="relative z-50 flex justify-between">
             <div className="flex items-center md:gap-x-12">
