@@ -143,50 +143,42 @@ function Home() {
 
       {/* main area  */}
       <main className="p-6">
-        {filteredSortedgroupByArr?.length === 0 ? (
-          <div className="flex justify-center items-center">
-            <h6 className="text-2xl">No Products Found</h6>
-          </div>
-        ) : (
-          <>
-            {/* products will be there */}
-            <ProductList productList={filteredSortedgroupByArr}></ProductList>
-            {/* pagination */}
-            <div className="pagination mt-6">
-              {pageNum != 1 && (
-                <IconButton
-                  onClick={() => {
-                    if (pageNum == 1) return;
-                    setPageNum((pageNum) => pageNum - 1);
-                  }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5 8.25 12l7.5-7.5"
-                  />
-                </IconButton>
-              )}
+        {/* products will be there */}
+        <ProductList productList={filteredSortedgroupByArr}></ProductList>
+        {/* pagination */}
+        {filteredSortedgroupByArr?.length > 0 && (
+          <div className="pagination mt-6">
+            {pageNum != 1 && (
+              <IconButton
+                onClick={() => {
+                  if (pageNum == 1) return;
+                  setPageNum((pageNum) => pageNum - 1);
+                }}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5 8.25 12l7.5-7.5"
+                />
+              </IconButton>
+            )}
 
-              <div className="pagenum text-slate-900 bg-slate-100">
-                {pageNum}
-              </div>
-              {pageNum != totalPages && (
-                <IconButton
-                  onClick={() => {
-                    if (pageNum == totalPages) return;
-                    setPageNum((pageNum) => pageNum + 1);
-                  }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
-                </IconButton>
-              )}
-            </div>
-          </>
+            <div className="pagenum text-slate-900 bg-slate-100">{pageNum}</div>
+            {pageNum != totalPages && (
+              <IconButton
+                onClick={() => {
+                  if (pageNum == totalPages) return;
+                  setPageNum((pageNum) => pageNum + 1);
+                }}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                />
+              </IconButton>
+            )}
+          </div>
         )}
       </main>
     </>

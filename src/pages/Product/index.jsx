@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import URL from "../../urlConfig";
-import "./product.css";
+// import "./product.css";
 
 export function Product() {
   const name = useRef(null);
