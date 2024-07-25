@@ -36,7 +36,6 @@ export function Logo() {
 }
 function NavBar() {
   const { authenticatedUser, setAuthenticatedUser } = useAuth();
-  console.log("authenticatedUser", authenticatedUser);
   const quantity = useSelector((store) => {
     return store.cartReducer.cartQuantity;
   });

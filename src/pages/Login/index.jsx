@@ -38,10 +38,14 @@ export function Login() {
         navigate(location.state?.from?.pathname || "/");
       }
     } catch (error) {
+      const message =
+        error?.response?.data?.message ||
+        error.message ||
+        "Something went wrong";
       setAuthenticatedUser(null);
-      setErrMsg(error.response.data.message);
-      setLoading(false);
+      setErrMsg(message);
     }
+    setLoading(false);
   };
 
   return (

@@ -37,12 +37,11 @@ export function Signup() {
         // navigate("/signin");
       }
     } catch (error) {
-      const {
-        response: {
-          data: { message }
-        }
-      } = error;
-      // console.log("error", error);
+      const message =
+        error?.response?.data?.message ||
+        error.message ||
+        "Something went wrong";
+
       setErrMsg(message);
     }
     setLoading(false);
@@ -151,14 +150,15 @@ export function Signup() {
               htmlFor=":S7:"
               className="mb-3 block text-sm font-medium text-gray-700"
             >
-              Contact Number
+              Contact Number (10 Digits number only)
             </label>
             <input
               id=":S7:"
               autoComplete="new-password"
               required
               className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
-              type="number"
+              type="tel"
+              pattern="[0-9]{10}"
               name="phone"
               placeholder="Your Contact Number.."
               value={phone}
