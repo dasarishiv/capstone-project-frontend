@@ -18,7 +18,7 @@ function Categories(props) {
       <button
         className={`capitalize rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-blue-200 hover:text-slate-800 ${
           selectedCatogory === "All categories"
-            ? "bg-blue-500 text-slate-200"
+            ? "bg-blue-500 text-slate-100"
             : ""
         }`}
         onClick={() => {
@@ -33,7 +33,7 @@ function Categories(props) {
           <button
             key={category}
             className={`capitalize rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-blue-200 hover:text-slate-800 ${
-              isActive ? "bg-blue-500 text-slate-200" : ""
+              isActive ? "bg-blue-500 text-slate-100" : ""
             }`}
             onClick={() => {
               setSelectedCatogory(category);

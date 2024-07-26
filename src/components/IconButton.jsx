@@ -1,4 +1,4 @@
-export function IconButton({ children, onClick, ...restProps }) {
+export function IconButton({ children, onClick, size, ...restProps }) {
   return (
     <button onClick={onClick} {...restProps}>
       <svg
@@ -7,7 +7,7 @@ export function IconButton({ children, onClick, ...restProps }) {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className="text-blue-600 text-base h-6"
+        className={`text-blue-600 text-base ${size === "lg" ? "h-8" : "h-6"}`}
       >
         {children}
       </svg>

@@ -3,6 +3,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 import { useDispatch, useSelector } from "react-redux";
 import { action } from "../redux/slices/cartSlice";
+import { NavLink } from "react-router-dom";
 import { IconButton } from "./IconButton";
 
 function ProductList(props) {
@@ -42,10 +43,13 @@ function ProductList(props) {
                 <div className="max-w-4xl mx-auto grid grid-cols-1">
                   <div className="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0">
                     <h3 className="mt-1 text-lg font-semibold text-white capitalize">
-                      {product.title}
+                      <NavLink to={`/product/${product._id}`}>
+                        {product.title}
+                      </NavLink>
                     </h3>
                   </div>
                   <div className="grid gap-4 col-start-1 col-end-3 row-start-1">
+                    {product.image}
                     <img
                       src={product.image}
                       alt={product.title}
@@ -154,7 +158,7 @@ function ProductList(props) {
     </>
   );
 }
-function PrintCount(props) {
+export function PrintCount(props) {
   const { cartProducts, id } = props;
   let quanitity = 0;
   for (let i = 0; i < cartProducts.length; i++) {
