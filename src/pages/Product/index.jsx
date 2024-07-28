@@ -4,6 +4,7 @@ import URL from "../../urlConfig";
 // import "./product.css";
 
 export function Product() {
+  const [product, setProduct] = useState({ name: "sample" });
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState(null);
   const [categories, setCategories] = useState([]);
@@ -81,6 +82,7 @@ export function Product() {
               placeholder="Product Name"
               name="name"
               required
+              defaultValue={product.name}
             />
           </div>
           <div className="col-span-full">

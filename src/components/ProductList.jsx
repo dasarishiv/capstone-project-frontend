@@ -1,26 +1,11 @@
-import React from "react";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
-import { useDispatch, useSelector } from "react-redux";
-import { action } from "../redux/slices/cartSlice";
 import { NavLink } from "react-router-dom";
-import { IconButton } from "./IconButton";
+import { Loading } from "./Loading";
+import { PrintCount } from "./PrintCount";
 
 function ProductList(props) {
   const { productList } = props;
-  const cartProducts = useSelector((store) => {
-    return store.cartReducer.cartProducts;
-  });
-  const dispatch = useDispatch();
-  const handleAddProduct = (product) => {
-    dispatch(action.addToCart(product));
-  };
 
-  const handleDeleteProduct = (product) => {
-    dispatch(action.deleteFromCart(product));
-  };
-
-  if (productList != null && productList == 0) {
+  if (productList?.length === 0) {
     return (
       <div className="flex justify-center items-center">
         <h6 className="text-2xl">No Products Found</h6>
@@ -29,11 +14,11 @@ function ProductList(props) {
   }
 
   return (
-    <>
+    <section className="flex gap-6 flex-wrap justify-center">
       {productList == null ? (
-        <h3> Loading...</h3>
+        <Loading />
       ) : (
-        <section className="flex gap-6 flex-wrap justify-center">
+        <>
           {productList.map((product) => {
             return (
               <article
@@ -43,13 +28,15 @@ function ProductList(props) {
                 <div className="max-w-4xl mx-auto grid grid-cols-1">
                   <div className="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0">
                     <h3 className="mt-1 text-lg font-semibold text-white capitalize">
-                      <NavLink to={`/product/${product._id}`}>
-                        {product.title}
+                      <NavLink
+                        className="text-gray-400 hover:underline"
+                        to={`/product/${product._id}`}
+                      >
+                        {product.name}
                       </NavLink>
                     </h3>
                   </div>
                   <div className="grid gap-4 col-start-1 col-end-3 row-start-1">
-                    {product.image}
                     <img
                       src={product.image}
                       alt={product.title}
@@ -105,7 +92,7 @@ function ProductList(props) {
                         />
                       </svg>
                       <span>
-                        {product.averageRating}{" "}
+                        {Math.round(product.averageRating)}{" "}
                         <span className="text-slate-400 font-normal">
                           ({product.reviews?.length})
                         </span>
@@ -118,55 +105,16 @@ function ProductList(props) {
                   </p>
 
                   <div className="mt-4 col-start-1 self-center flex items-center justify-center gap-2">
-                    <IconButton
-                      onClick={() => {
-                        handleAddProduct(product);
-                      }}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      />
-                    </IconButton>
-                    {
-                      <span className="text-xl text-slate-800">
-                        <PrintCount
-                          cartProducts={cartProducts}
-                          id={product.id}
-                        ></PrintCount>
-                      </span>
-                    }
-                    <IconButton
-                      onClick={() => {
-                        handleDeleteProduct(product);
-                      }}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      />
-                    </IconButton>
+                    <PrintCount product={product} />
                   </div>
                 </div>
               </article>
             );
           })}
-        </section>
+        </>
       )}
-    </>
+    </section>
   );
-}
-export function PrintCount(props) {
-  const { cartProducts, id } = props;
-  let quanitity = 0;
-  for (let i = 0; i < cartProducts.length; i++) {
-    if (cartProducts[i].id == id) {
-      quanitity = cartProducts[i].indQuantity;
-    }
-  }
-  return <>{quanitity}</>;
 }
 
 export default ProductList;

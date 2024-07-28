@@ -14,7 +14,7 @@ import { IconButton } from "../components/IconButton";
 function Home() {
   // preserver -> pagination
   /***single source of truth for all the products***/
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   /************ all the categories -> a product**********/
   const [categories, setCategories] = useState([]);
   /**********Action***********/
@@ -38,8 +38,7 @@ function Home() {
       const productArr = productData.data.data;
       const productList = productArr.map((product) => {
         return {
-          id: product._id,
-          title: product.name,
+          // title: product.name,
           image: `${URL.GET_IMAGE_URL}${product?.images[0]?.url}`,
           ...product
         };
@@ -67,8 +66,8 @@ function Home() {
     pageNum,
     pageSize
   );
-  const filteredSortedgroupByArr = object.filteredSortedgroupByArr;
-  const totalPages = object.totalPages;
+  const filteredSortedgroupByArr = object?.filteredSortedgroupByArr;
+  const totalPages = object?.totalPages ?? 0;
   return (
     <>
       {/* header */}

@@ -6,7 +6,8 @@ const urlConfig = {
   LOGOUT_URL: `${BASE_URL}/api/auth/logout`,
   GET_PRODUCTS_URL: `${BASE_URL}/api/products`,
   GET_CATEGORIES: `${BASE_URL}/api/products/categories`,
-  GET_IMAGE_URL: `${BASE_URL}`
+  GET_IMAGE_URL: `${BASE_URL}`,
+  REVIEW_URL: `${BASE_URL}/api/reviews`
 };
 
 export default urlConfig;
