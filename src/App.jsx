@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import PageNotFound from "./pages/PageNotFound";
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
+import BookingStatus from "./pages/BookingStatus";
 import Cart from "./pages/Cart";
 import User from "./pages/User";
 import PaginationProvider from "./contexts/PaginationContext";
@@ -27,6 +28,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/cart" element={<Cart></Cart>}></Route>
             <Route path="/createProduct" element={<Product />}></Route>
+            <Route path="/booking/:id" element={<BookingStatus />}></Route>
           </Route>
 
           <Route

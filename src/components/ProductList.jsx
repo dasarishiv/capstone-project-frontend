@@ -63,7 +63,7 @@ function ProductList(props) {
                       </svg>
 
                       <span className="text-slate-950 ml-2 text-2xl">
-                        $ {product.price}
+                        ₹ {product.price}
                       </span>
                     </dd>
                     <dt className="sr-only">Rating</dt>
@@ -104,7 +104,7 @@ function ProductList(props) {
                     {product.description}
                   </p>
 
-                  <div className="mt-4 col-start-1 self-center flex items-center justify-center gap-2">
+                  <div className="mt-4 col-start-1 self-center flex items-center justify-center gap-2 flex-wrap">
                     <PrintCount product={product} />
                   </div>
                 </div>

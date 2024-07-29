@@ -121,7 +121,7 @@ function ProductDetails() {
           </svg>
 
           <span className="text-slate-950 ml-2 text-5xl">
-            $ {product.price}
+            ₹ {product.price}
           </span>
         </dd>
         <dt className="sr-only">Rating</dt>

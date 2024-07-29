@@ -45,6 +45,18 @@ const cartSlice = createSlice({
         }
         console.log("state.cartProducts", state.cartProducts);
       }
+    },
+    removeFromCart: (state, action) => {
+      const productToBeRemoved = { ...action.payload };
+      const productIdx = state.cartProducts.findIndex((cProduct) => {
+        return cProduct._id == productToBeRemoved._id;
+      });
+      if (productIdx !== -1) {
+        let product = state.cartProducts[productIdx];
+        const productQuantity = product.indQuantity;
+        state.cartProducts.splice(productIdx, 1);
+        state.cartQuantity = state.cartQuantity - productQuantity;
+      }
     }
   }
 });

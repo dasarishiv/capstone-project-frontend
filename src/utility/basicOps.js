@@ -14,7 +14,7 @@ export default function basicOps(
   if (searchTerm != "") {
     filteredArr = filteredArr.filter((product) => {
       let lowerSearchTerm = searchTerm.toLowerCase();
-      let lowerTitle = product.title.toLowerCase();
+      let lowerTitle = product.name.toLowerCase();
       return lowerTitle.includes(lowerSearchTerm);
     });
   }
@@ -64,4 +64,24 @@ function decComparator(product1, product2) {
   } else {
     return -1;
   }
+}
+
+export function loadScript(src, id) {
+  return new Promise((resolve) => {
+    const scriptRef = document.getElementById(id);
+    if (scriptRef) {
+      resolve(true);
+      return;
+    }
+    const script = document.createElement("script");
+    script.id = id;
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
 }
