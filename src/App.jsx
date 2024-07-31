@@ -26,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>}></Route>
           <Route element={<RequireAuth />}>
+            <Route path="/user" element={<User></User>}></Route>
             <Route path="/cart" element={<Cart></Cart>}></Route>
             <Route path="/createProduct" element={<Product />}></Route>
             <Route path="/booking/:id" element={<BookingStatus />}></Route>
@@ -35,7 +36,7 @@ function App() {
             path="/product/:id"
             element={<ProductDetails></ProductDetails>}
           ></Route>
-          <Route path="/user" element={<User></User>}></Route>
+
           <Route path="/signup" element={<Signup></Signup>}></Route>
           <Route path="/signin" element={<Login></Login>}></Route>
           <Route path="/home" element={<Navigate to="/"></Navigate>}></Route>

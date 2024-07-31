@@ -57,7 +57,7 @@ export function Signup() {
           Already registered?
           <Link
             className="font-medium text-blue-600 hover:underline mx-1"
-            to="/login"
+            to="/signin"
           >
             Sign in
           </Link>
@@ -166,24 +166,6 @@ export function Signup() {
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
           </div>
-          {/* <div className="col-span-full">
-              <label
-                htmlFor=":S5:"
-                className="mb-3 block text-sm font-medium text-gray-700"
-              >
-                How did you hear about us?
-              </label>
-              <select
-                id=":S5:"
-                name="referral_source"
-                className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm pr-8"
-              >
-                <option>AltaVista search</option>
-                <option>Super Bowl commercial</option>
-                <option>Our route 34 city bus ad</option>
-                <option>The “Never Use This” podcast</option>
-              </select>
-            </div> */}
           {errMsg?.length > 0 && (
             <div className="bg-amber-200 text-red-500 font-medium text-sm px-2 py-1 rounded-sm">
               {errMsg}

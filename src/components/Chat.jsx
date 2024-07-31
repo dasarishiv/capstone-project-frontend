@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { socket } from "../socket";
 
 export function Chat() {
   // console.log("chat component", socket);
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [serverMessages, setServerMessages] = useState([]);
+  const [userMessage, setUserMessage] = useState("");
+  const scrollElRef = useRef(null);
 
   useEffect(() => {
     function onConnect() {
@@ -16,7 +18,16 @@ export function Chat() {
       setServerMessages([]);
     }
     function onMessage(message) {
-      setServerMessages((prev) => [...prev, message]);
+      setServerMessages((prev) => [...prev, { message, type: "server" }]);
+      setTimeout(() => {
+        const childNodes = scrollElRef?.current?.childNodes;
+        if (childNodes?.length) {
+          const liEls = childNodes[childNodes.length - 1];
+          console.log("liEls", liEls);
+          liEls?.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 0);
+      // scrollElRef?.current?.scrollIntoView({ behavior: "smooth" });
       //   console.log("message from server", message);
     }
 
@@ -36,6 +47,31 @@ export function Chat() {
 
   const handleDisconnect = () => {
     socket.disconnect();
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    try {
+      if (form.checkValidity()) {
+        // navigate("/signin");
+        // console.log("user message", userMessage);
+        setServerMessages((prev) => [
+          ...prev,
+          { message: userMessage, type: "user" }
+        ]);
+        socket.emit("message", userMessage);
+        form.reset();
+        setUserMessage("");
+      }
+    } catch (error) {
+      const message =
+        error?.response?.data?.message ||
+        error.message ||
+        "Something went wrong";
+
+      console.log(message);
+    }
   };
 
   return (
@@ -97,18 +133,49 @@ export function Chat() {
       </div>
 
       {isConnected && (
-        <div className="chat-container mt-4">
-          {isConnected && serverMessages?.length > 0 && (
-            <>
-              <h5>{socket?.id}</h5>
-              <ul>
-                {serverMessages.map((msg, ind) => (
-                  <li key={ind}>{msg}</li>
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
+        <>
+          <div className="flex flex-col flex-1 overflow-y-auto mt-3">
+            {serverMessages?.length > 0 && (
+              <>
+                <ul className="flex flex-col gap-2" ref={scrollElRef}>
+                  {serverMessages.map((msg, ind) => (
+                    <li
+                      className={`p-2 mb-2 rounded-lg shadow-md w-2/3 whitespace-break-spaces  ${
+                        msg.type === "user"
+                          ? "bg-green-300 self-end"
+                          : "bg-blue-300 self-start"
+                      }`}
+                      key={ind}
+                    >
+                      {msg.message}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+          <form
+            className="flex flex-row items-center gap-3 bg-white rounded-xl shadow-sm p-2"
+            action="#"
+            onSubmit={handleSubmit}
+          >
+            <input
+              type="text"
+              autoComplete="off"
+              required
+              name="message"
+              onChange={(e) => setUserMessage(e.target.value)}
+              className="px-2 rounded-sm border border-slate-300 accent-pink-500 dark:accent-pink-600 checked:appearance-auto"
+            />
+
+            <button
+              type="submit"
+              className="px-4 py-1 text-sm text-blue-600 font-semibold rounded-full border border-blue-200 hover:text-white hover:bg-blue-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            >
+              Send
+            </button>
+          </form>
+        </>
       )}
     </div>
   );

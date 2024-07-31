@@ -61,15 +61,16 @@ function NavBar() {
           <nav className="relative z-50 flex justify-between">
             <div className="flex items-center gap-x-12">
               <Logo />
-              <div className="flex gap-x-6">
-                <NavLink className="main-nav-item" to="/user">
-                  User
-                </NavLink>
-
-                <NavLink className="main-nav-item" to="/createProduct">
-                  Create Product
-                </NavLink>
-              </div>
+              {authenticatedUser && (
+                <div className="flex gap-x-6">
+                  {(authenticatedUser.role == "admin" ||
+                    authenticatedUser.role == "seller") && (
+                    <NavLink className="main-nav-item" to="/createProduct">
+                      Create Product
+                    </NavLink>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="flex items-center gap-x-8">
@@ -106,6 +107,9 @@ function NavBar() {
                 </>
               ) : (
                 <>
+                  <NavLink className="main-nav-item" to="/user">
+                    User
+                  </NavLink>
                   <button
                     title="LOG OUT"
                     onClick={() => {

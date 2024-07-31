@@ -55,7 +55,7 @@ function Home() {
       // const categoriesData = await resp.json();
       const categoriesData = await axios.get(URL.GET_CATEGORIES);
       console.log("categories", categoriesData);
-      setCategories(categoriesData.data.data);
+      setCategories(["All categories", ...categoriesData.data.data]);
     })();
   }, []);
   const object = basicOps(

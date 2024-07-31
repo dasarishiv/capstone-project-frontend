@@ -15,25 +15,13 @@ function Categories(props) {
 
   return (
     <div className="flex items-center gap-x-5 justify-end">
-      <button
-        className={`capitalize rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-blue-200 hover:text-slate-800 ${
-          selectedCatogory === "All categories"
-            ? "bg-blue-500 text-slate-100"
-            : ""
-        }`}
-        onClick={() => {
-          setSelectedCatogory("All categories");
-        }}
-      >
-        All categories
-      </button>
       {categories.map((category) => {
         const isActive = selectedCatogory === category;
         return (
           <button
             key={category}
-            className={`capitalize rounded-lg px-2 py-1 text-sm text-slate-700 hover:bg-blue-200 hover:text-slate-800 ${
-              isActive ? "bg-blue-500 text-slate-100" : ""
+            className={`capitalize rounded-lg px-2 py-1 text-sm hover:bg-blue-200 hover:text-slate-800 ${
+              isActive ? "bg-blue-500 text-slate-100" : "text-slate-700"
             }`}
             onClick={() => {
               setSelectedCatogory(category);

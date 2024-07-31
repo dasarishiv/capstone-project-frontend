@@ -29,7 +29,7 @@ function ProductList(props) {
                   <div className="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0">
                     <h3 className="mt-1 text-lg font-semibold text-white capitalize">
                       <NavLink
-                        className="text-gray-400 hover:underline"
+                        className="text-gray-50 hover:underline"
                         to={`/product/${product._id}`}
                       >
                         {product.name}
@@ -44,6 +44,11 @@ function ProductList(props) {
                       loading="lazy"
                     />
                   </div>
+                  <ul className="col-start-1 flex flex-wrap gap-2 pt-4 text-sm text-sky-600 *:rounded-full *:border *:border-sky-100 *:bg-sky-50 *:px-2 *:py-0.5 capitalize">
+                    {product.categories.map((category) => {
+                      return <li key={category}>{category}</li>;
+                    })}
+                  </ul>
                   <dl className="mt-4 text-xs font-medium flex items-center row-start-2">
                     <dt className="sr-only">Price</dt>
                     <dd className="flex items-center">
@@ -98,10 +103,37 @@ function ProductList(props) {
                         </span>
                       </span>
                     </dd>
+                    <dt className="sr-only">more details</dt>
+                    <dd className="text-indigo-600 flex items-center">
+                      <svg
+                        width="2"
+                        height="2"
+                        aria-hidden="true"
+                        fill="currentColor"
+                        className="mx-3 text-slate-300"
+                      >
+                        <circle cx="1" cy="1" r="1" />
+                      </svg>
+
+                      <NavLink
+                        className="text-blue-600 text-sm hover:underline"
+                        to={`/product/${product._id}`}
+                      >
+                        Details
+                      </NavLink>
+                    </dd>
                   </dl>
+                  <div className="col-start-1 flex flex-wrap gap-2 pt-4 text-sm text-sky-600">
+                    <span>
+                      Brand:{" "}
+                      <span className="rounded-full text-black border border-sky-100 bg-orange-300 px-2 py-0.5 capitalize">
+                        {product.brand}
+                      </span>
+                    </span>
+                  </div>
 
                   <p className="mt-4 text-sm col-start-1 min-h-5">
-                    {product.description}
+                    {product.sortDescription || product.description}
                   </p>
 
                   <div className="mt-4 col-start-1 self-center flex items-center justify-center gap-2 flex-wrap">

@@ -82,11 +82,11 @@ function ProductDetails() {
           </IconButton>
         </div>
       )}
-      <div className="relative pt-full bg-white rounded-lg shadow-lg overflow-hidden h-60">
+      <div className="relative pt-full bg-white rounded-lg shadow-lg overflow-hidden h-96">
         <img
           src={product.image}
           alt={product.name}
-          className="absolute inset-0 w-full h-full object-none object-top"
+          className="absolute inset-0 w-full h-full object-contain object-top"
           decoding="async"
           loading="lazy"
         />
@@ -100,6 +100,14 @@ function ProductDetails() {
           return <li key={category}>{category}</li>;
         })}
       </ul>
+      <div className="flex flex-wrap gap-2 pt-4 text-sm text-sky-600">
+        <span>
+          Brand:{" "}
+          <span className="rounded-full text-black border border-sky-100 bg-orange-300 px-2 py-0.5 capitalize">
+            {product.brand}
+          </span>
+        </span>
+      </div>
       <p className="mt-4 text-lg">{product.description}</p>
 
       <dl className="mt-4 text-xs font-medium flex items-center row-start-2">
