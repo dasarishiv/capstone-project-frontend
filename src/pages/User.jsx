@@ -26,7 +26,7 @@ function User() {
     try {
       let url = `${URL.BOOKING_URL}`;
       if (authenticatedUser?.role !== "admin") {
-        url = `${URL.BOOKING_URL}/${authenticatedUser._id}`;
+        url = `${URL.BOOKING_URL}/user/${authenticatedUser._id}`;
       }
       const bookingsData = await axios.get(url, {
         withCredentials: true
