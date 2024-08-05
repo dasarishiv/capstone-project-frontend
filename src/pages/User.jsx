@@ -140,7 +140,12 @@ function User() {
           {bookings?.map((booking) => (
             <tr key={booking._id} className="odd:bg-white even:bg-slate-50">
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-                {booking._id}
+                <NavLink
+                  className="text-blue-600 text-sm hover:underline"
+                  to={`/booking/${booking._id}`}
+                >
+                  {booking._id}
+                </NavLink>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
                 {new Date(booking.bookedAt).toLocaleString()}
